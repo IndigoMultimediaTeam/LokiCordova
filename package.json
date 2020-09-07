@@ -1,7 +1,7 @@
 {
     "name": "lokicordova",
     "fullName": "LokiCordova",
-    "version": "0.0.0",
+    "version": "1.0.0",
     "description": "Opinionated-customized usage of LokiJS in ours Cordova's projects.",
     "main": "gulpfile.js",
     "sequence": [
