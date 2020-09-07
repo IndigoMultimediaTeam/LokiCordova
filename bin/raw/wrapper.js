@@ -284,7 +284,32 @@
                 value: ({ right })=> Boolean(right)
             }
         ];
-        return { join_full, join_inner, join_left, join_right };
+        /**
+         * Předpřipravené sekvence úkonů pro databázi LokiJS (viz [JSDoc: Tutorial: Collection Transforms](http://techfort.github.io/LokiJS/tutorial-Collection%20Transforms.html)).
+         * 
+         * Lze používat:
+         * - [`*.transform(transform: **DB_TRANSFORMS**, parameters: **object**)`](http://techfort.github.io/LokiJS/Resultset.html#transform)
+         * - [*.chain(transform: **DB_TRANSFORMS**, parameters: **object**)](http://techfort.github.io/LokiJS/Collection.html#chain)
+         * @typedef {Object[]} DB_TRANSFORMACE
+         * @memberof db_utils
+         * @inner
+         */
+        /**
+         * Pomocná funkce pro vložení/aktualizování záznamu v tabulce `colection`.
+         * @param {tb~TABLE} collection Cílová tabulka
+         * @param {object} query Argument pro {@link tb.findOne}
+         * @param {object} updated_data Aktualizovaná data
+         */
+        function upsert(collection, query, updated_data){
+            const row= collection.findOne(query);
+            if(row){
+                collection.update(Object.assign(row, updated_data));
+                return 0;
+            }
+            collection.insert(updated_data);
+            return 1;
+        }
+        return { join_full, join_inner, join_left, join_right, upsert };
     })();
     
     class LokiWithUtils extends _dependencies[0]{

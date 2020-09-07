@@ -4,7 +4,7 @@
  * @param {object} query Argument pro {@link tb.findOne}
  * @param {object} updated_data Aktualizovaná data
  */
-function upsert(collection, query, updated_data){
+export function upsert(collection, query, updated_data){
     const row= collection.findOne(query);
     if(row){
         collection.update(Object.assign(row, updated_data));
