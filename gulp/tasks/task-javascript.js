@@ -25,7 +25,8 @@ module.exports= function({gulp, scripts, $g, $o, app, cordova_target_device, err
             return new Promise(function(resolve){
                 let main_stream= gulp.src([ `${folder}${files_pattern}`, `!${folder}${files_not_pattern}` ])
                         .pipe(gulp_place({ folder, string_wrapper: '"' }))
-                        .pipe($g.replace(/[^\n]*(\/\*\s*gulp\s\*\/)?\/\*\s*global gulp_place\s*\*\/\r?\n/g,""));
+                        .pipe($g.replace(/[^\n]*(\/\*\s*gulp\s\*\/)?\/\*\s*global gulp_place\s*\*\/\r?\n/g,""))
+                        .pipe($g.replace(/^\r?\n$/gm, ""));
         
                 main_stream= main_stream.pipe($g.minify_js({ ext: { min: ".min.js" }, mangle: true, compress: { conditionals: true, evaluate: true } }));
         

@@ -104,8 +104,6 @@
         }
     };
 
-
-
     
     instance_methods.loadDatabase= {
         value: function loadDatabase(dbname, callback) {
@@ -133,8 +131,6 @@
             });
         }
     };
-
-
 
     
     instance_methods.saveDatabase= {
@@ -203,10 +199,6 @@
         }
     };
     _createClass(FSAdapter, instance_methods);
-
-
-
-
 
     const loki_utils= (function loki_utils_iief(){
         /**
