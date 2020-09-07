@@ -5,9 +5,9 @@
     "description": "Opinionated-customized usage of LokiJS in ours Cordova's projects.",
     "main": "gulpfile.js",
     "sequence": [
+        "lokijs",
         "javascript",
-        "examples",
-        "doc"
+        "concat"
     ],
     "app_keys_map": [
         [
@@ -56,7 +56,10 @@
     "homepage": "https://github.com/IndigoMultimediaTeam/LokiCordova#readme",
     "devDependencies": {
         "gulp": "^4.0.2",
+        "gulp-concat": "^2.6.1",
+        "gulp-minify": "^3.1.0",
         "gulp-place": "^1.8.0",
+        "gulp-replace": "^1.0.0",
         "jsdoc-to-markdown": "^6.0.1",
         "jshint": "^2.12.0",
         "lokijs": "^1.5.11"

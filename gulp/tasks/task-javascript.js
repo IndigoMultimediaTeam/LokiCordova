@@ -7,11 +7,11 @@
 }*/
 module.exports= function({gulp, scripts, $g, $o, app, cordova_target_device, error}){
     const /* files source and destination */
-        [ folder, files_pattern, files_not_pattern ]= [ app.directories.src+"js/", "*.js", "*.sub.js" ],
-        destination= app.directories.bin_www+"js/";
+        [ folder, files_pattern, files_not_pattern ]= [ app.directories.src, "*.js", "*.sub.js" ],
+        destination= app.directories.bin+"raw/";
     const [jshint_cmd, ...jshint_rest]= scripts.jshint.split(" ");
-    const skip_final_jshint= [ "core.js", "index.js" ];
-    /* jshint -W061 */const gulp_place= require("../gulp_place.js")({gulp_replace: $g.replace, fs: $o.fs, variable_eval: (str)=> eval(str), filesCleaner: require("../gulp_cleanJSHINT.js")});/* jshint +W061 */
+    const skip_final_jshint= [  ];
+    /* jshint -W061 */const gulp_place= $g.place({ variable_eval: (str)=> eval(str), filesCleaner: require("../gulp_cleanJSHINT.js") });/* jshint +W061 */
     return function(cb){
         let out_files= [];
         if(error.getNum()) return cb();
@@ -27,7 +27,7 @@ module.exports= function({gulp, scripts, $g, $o, app, cordova_target_device, err
                         .pipe(gulp_place({ folder, string_wrapper: '"' }))
                         .pipe($g.replace(/[^\n]*(\/\*\s*gulp\s\*\/)?\/\*\s*global gulp_place\s*\*\/\r?\n/g,""));
         
-                if(app.external_publication){ main_stream= main_stream.pipe($g.minify_js({ ext: { min: ".js" }, noSource: true, mangle: true, compress: { conditionals: true, evaluate: true } })); }
+                main_stream= main_stream.pipe($g.minify_js({ mangle: true, compress: { conditionals: true, evaluate: true } }));
         
                 main_stream
                     .on('error', error.handler)
