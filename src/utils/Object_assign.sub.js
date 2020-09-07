@@ -1,0 +1,1 @@
+var Object_assign= Object.assign;
