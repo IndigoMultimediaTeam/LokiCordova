@@ -1,9 +1,9 @@
 /* jshint maxdepth: 3 */
-/* global _dependencies */
+import * as LokiJS from "depends:loki";
 gulp_place("FSAdapter/*.sub.js", "glob_once");/* global FSAdapter */
 gulp_place('{ "glob": "loki_utils/*.sub.js", "use_strict": false }', "combine");/* global loki_utils */
 
-class LokiWithUtils extends _dependencies[0]{
+class LokiWithUtils extends LokiJS{
     constructor(file, params){
         super(file, params);
         if(this.utils) throw new Error("LokiWithUtils is not supported with current version of LokiJS!!!");
