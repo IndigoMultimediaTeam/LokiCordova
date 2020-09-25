@@ -1,7 +1,7 @@
 /**
- * Krok v {@link db_utils~DB_TRANSFORMACE} sloužící k fyzickému sloučení záznamů.
+ * Krok v {@link typpes.DB_TRANSFORMACE} sloužící k fyzickému sloučení záznamů.
  * @property {object}
- * @param {array|Resultset|Collection} data Odpovídá `joinData` v [eqJoin](http://techfort.github.io/LokiJS/Collection.html#eqJoin)
+ * @param {object[]|types.RADEK[]|types.TABULKA} data Odpovídá `joinData` v [eqJoin](http://techfort.github.io/LokiJS/Collection.html#eqJoin)
  * @param {string} left_key Jméno klíče ke sloučení v levé tabulce
  * @param {string} right_key Jméno klíče ke sloučení v pravé tabulce
  * @memberof db_utils

@@ -23,6 +23,61 @@
     "use strict";
     var _dependencies= Array.prototype.slice.call(arguments);
     const LokiJS= _dependencies[0];
+    /**
+     * @namespace types
+     * @inner
+     */
+    /**
+     * Instance `loki`, viz [JSDoc: Class: Loki](http://techfort.github.io/LokiJS/Loki.html).
+     * @typedef {Object} DATABAZE
+     * @memberof types
+     */
+    /**
+     * Instance `Collection`, viz [JSDoc: Class: Collection](http://techfort.github.io/LokiJS/Collection.html).
+     * @typedef {Object} TABULKA
+     * @memberof types
+     */
+    /**
+     * Záznam z {@link types.TABULKA}, viz [JSDoc: Class: Resultset](http://techfort.github.io/LokiJS/Resultset.html).
+     * @typedef {Object} RADEK
+     * @memberof types
+     */
+    /**
+     * Data ve formátu pro uložení do {@link types.TABULKA}. Jedná se o **obyčejný objekt**, který si loki převede na {@link types.RADEK}.
+     * 
+     * Nedoporučuje se, aby dědil informace z {@link types.RADEK} (PS: objekty se předávají **referencí!!!**).
+     * @typedef {Object} DATA
+     * @memberof types
+     * @example <caption>očekávané</caption>
+     * const data_1= { name: "Jan", surname: "Andrle" };
+     * const data_2= Object.assign(Object.create(null), data_1);
+     * const radek: types.RADEK; / * vystup například z *.findOne * /
+     * const data_3= { name: radek.name, surname: radek.surname };
+     * @example <caption>**neočekávané**</caption>
+     * const radek: types.RADEK; / * vystup například z *.findOne * /
+     * const data_1= radek;
+     * const data_2= { $loki: 1 };
+     * const data_3= { meta: { / * … * / } };
+     * const data_4= { $loki: 5, meta: { / * … * / } };
+     */
+    /**
+     * Dotaz na {@link types.RADEK} (jeden, či více), viz [JSDoc: Tutorial: Query Examples](http://techfort.github.io/LokiJS/tutorial-Query%20Examples.html).
+     * 
+     * *Tyto dotazy jsou výhodnější na použití než `*.where`, protože jsou optimalizované (případně optimalizovatlené) – viz [JSDoc: Tutorial: Indexing and Query performance](http://techfort.github.io/LokiJS/tutorial-Indexing%20and%20Query%20performance.html)!*
+     * @typedef {object} DOTAZ
+     * @memberof types
+     * @example <caption>Vyhledání uživatele/ů obsahující ve jméně 'Jan' a jejichž věk je >=28</caption>
+     * const dotaz= { $and: [ { name: { $contains: "Jan" } }, { age: { $gte: 28 } } ] };
+     */
+    /**
+     * Předpřipravené sekvence úkonů pro databázi LokiJS (viz [JSDoc: Tutorial: Collection Transforms](http://techfort.github.io/LokiJS/tutorial-Collection%20Transforms.html)).
+     * 
+     * Lze používat:
+     * - [`*.transform(transform: **DB_TRANSFORMS**, parameters: **object**)`](http://techfort.github.io/LokiJS/Resultset.html#transform)
+     * - [*.chain(transform: **DB_TRANSFORMS**, parameters: **object**)](http://techfort.github.io/LokiJS/Collection.html#chain)
+     * @typedef {Object[]} DB_TRANSFORMACE
+     * @memberof types
+     */
     /* cordova *//* global cordova *///gulp.keep.line
     
     function defaultOptions(){
@@ -201,11 +256,16 @@
     };
     _createClass(FSAdapter, instance_methods);
 
+    /**
+     * Jmenný prostor obsahující pomocné utility pro práci s tabulkami/databází
+     * @namespace db_utils
+     * @inner
+     */
     const loki_utils= (function loki_utils_iief(){
         /**
-         * Krok v {@link db_utils~DB_TRANSFORMACE} sloužící k fyzickému sloučení záznamů.
+         * Krok v {@link typpes.DB_TRANSFORMACE} sloužící k fyzickému sloučení záznamů.
          * @property {object}
-         * @param {array|Resultset|Collection} data Odpovídá `joinData` v [eqJoin](http://techfort.github.io/LokiJS/Collection.html#eqJoin)
+         * @param {object[]|types.RADEK[]|types.TABULKA} data Odpovídá `joinData` v [eqJoin](http://techfort.github.io/LokiJS/Collection.html#eqJoin)
          * @param {string} left_key Jméno klíče ke sloučení v levé tabulce
          * @param {string} right_key Jméno klíče ke sloučení v pravé tabulce
          * @memberof db_utils
@@ -277,27 +337,25 @@
                 value: ({ right })=> Boolean(right)
             }
         ];
-        
+        /**
+         * Uložení změn v databázi
+         * @memberof db_utils
+         * @param {types.DATABAZE} database
+         * @returns {Promise}
+         * @.then {undefined} Volá se při úspěchu
+         * @.catch {Error} Volá se při chybě `Error`
+         */
         function save_(database){
             return new Promise(function(resolve,reject){
                 database.saveDatabase(err=> err ? reject(err) : resolve());
             });
         }
         /**
-         * Předpřipravené sekvence úkonů pro databázi LokiJS (viz [JSDoc: Tutorial: Collection Transforms](http://techfort.github.io/LokiJS/tutorial-Collection%20Transforms.html)).
-         * 
-         * Lze používat:
-         * - [`*.transform(transform: **DB_TRANSFORMS**, parameters: **object**)`](http://techfort.github.io/LokiJS/Resultset.html#transform)
-         * - [*.chain(transform: **DB_TRANSFORMS**, parameters: **object**)](http://techfort.github.io/LokiJS/Collection.html#chain)
-         * @typedef {Object[]} DB_TRANSFORMACE
-         * @memberof db_utils
-         * @inner
-         */
-        /**
          * Pomocná funkce pro vložení/aktualizování záznamu v tabulce `colection`.
-         * @param {tb~TABLE} collection Cílová tabulka
-         * @param {object} updated_data Aktualizovaná data (předávaná referencí!)
-         * @param {object} query Argument pro {@link tb.findOne}
+         * @memberof db_utils
+         * @param {types.TABULKA} collection Cílová tabulka
+         * @param {types.DATA} updated_data Aktualizovaná data (předávaná referencí!)
+         * @param {types.DOTAZ} query Argument pro {@link tb.findOne}
          * @returns {number} 0/1 záznam aktualizován/vložen
          * @example
          * db.utils.upsertByQuery(tb.tabulka, { age: 28 }, { $and: [ { name: "Jan" }, { surname: "Andrle" } ] });
@@ -311,12 +369,12 @@
             collection.insert(updated_data);
             return 1;
         }
-        
         /**
          * Pomocná funkce pro vložení/aktualizování záznamu v tabulce `colection`.
-         * @param {tb~TABLE} collection Cílová tabulka
-         * @param {object} updated_data Aktualizovaná data (předávaná referencí!)
-         * @param {object} [key=id] Jméno obecného klíče, které slouží jako identifikátor pro {@link tb.findOne}
+         * @memberof db_utils
+         * @param {types.TABULKA} collection Cílová tabulka
+         * @param {types.DATA} updated_data Aktualizovaná data (předávaná referencí!)
+         * @param {string} [key=id] Jméno obecného klíče, které slouží jako identifikátor pro {@link tb.findOne}
          * @returns {number} 0/1 záznam aktualizován/vložen
          * @example
          * db.utils.upsertByKey(tb.tabulka, { id: 15, age: 28 });
@@ -331,12 +389,12 @@
             collection.insert(updated_data);
             return 1;
         }
-        
         /**
          * Pomocná funkce pro vložení/aktualizování záznamu v tabulce `colection`.
-         * @param {tb~TABLE} collection Cílová tabulka
-         * @param {object} updated_data Aktualizovaná data (předávaná referencí!)
-         * @param {object} [key=id] Jméno unikátního klíče, které slouží jako identifikátor pro [`Collection.prototype.by`](http://techfort.github.io/LokiJS/lokijs.js.html#line6608) nebo [`Collection.prototype.get`](http://techfort.github.io/LokiJS/lokijs.js.html#line6109) (tedy "$loki").
+         * @memberof db_utils
+         * @param {types.TABULKA} collection Cílová tabulka
+         * @param {types.DATA} updated_data Aktualizovaná data (předávaná referencí!)
+         * @param {string} [key=id] Jméno unikátního klíče, které slouží jako identifikátor pro [`Collection.prototype.by`](http://techfort.github.io/LokiJS/lokijs.js.html#line6608) nebo [`Collection.prototype.get`](http://techfort.github.io/LokiJS/lokijs.js.html#line6109) (tedy "$loki").
          * @returns {number} 0/1 záznam aktualizován/vložen
          * @throws {Error} Vyhodí chybu pokud je `key="$loki"` a aktualizovaná data obsahují tuto hodnotu vyplněnou (`{ $loki: 15, … }`) – přičemž není v databázi. Jde totiž o to, že `$loki` se autoinkrementuje! Takže jiná hodnota než již existující (aktualizace záznamu) či prázdná (přidání) nedává smysl.
          * @example
@@ -358,7 +416,14 @@
             collection.insert(updated_data);
             return 1;
         }
-        
+        /**
+         * **WIP**
+         * @memberof db_utils
+         * @param {types.TABULKA} collection
+         * @param {function} updateInsert
+         * @param {function} find
+         * @returns {function}
+         */
         function upsertByCallbacks(collection, updateInsert, find= (c, { id })=> c.findOne({ id })){
             return function(updated_data){
                 const row= find(collection, updated_data);

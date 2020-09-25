@@ -1,6 +1,12 @@
 /* jshint maxdepth: 3 */
 import * as LokiJS from "depends:loki";
+gulp_place("./types.sub.js", "file_once");
 gulp_place("FSAdapter/*.sub.js", "glob_once");/* global FSAdapter */
+/**
+ * Jmenný prostor obsahující pomocné utility pro práci s tabulkami/databází
+ * @namespace db_utils
+ * @inner
+ */
 gulp_place('{ "glob": "loki_utils/*.sub.js", "use_strict": false }', "combine");/* global loki_utils */
 
 class LokiWithUtils extends LokiJS{
