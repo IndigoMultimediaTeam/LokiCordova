@@ -6,6 +6,7 @@ gulp_place("FSAdapter/*.sub.js", "glob_once");/* global FSAdapter */
  * Jmenný prostor obsahující pomocné utility pro práci s tabulkami/databází
  * @namespace db_utils
  * @inner
+ * @private
  */
 gulp_place('{ "glob": "loki_utils/*.sub.js", "use_strict": false }', "combine");/* global loki_utils */
 

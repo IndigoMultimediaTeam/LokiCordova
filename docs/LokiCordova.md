@@ -107,12 +107,13 @@ Lze používat:
 
 <a name="db_utils"></a>
 
-## ~db\_utils : <code>object</code>
+## ~db\_utils : <code>object</code> ℗
 >Jmenný prostor obsahující pomocné utility pro práci s tabulkami/databází
 
 **Kind**: inner namespace <a name="db_utils" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin\raw/wrapper.js#L259" title="wrapper.js:259"><small>(defined@259)</small></a>  
+**Access**: private  
 
-* [~db_utils](#db_utils) : <code>object</code>
+* [~db_utils](#db_utils) : <code>object</code> ℗
     * _static_
         * [.join_full](#db_utils.join_full)
         * [.join_inner](#db_utils.join_inner)
@@ -136,7 +137,7 @@ Lze používat:
 
 Využívá [join_step](#db_utils..join_step)
 
-**Kind**: static constant of [<code>db\_utils</code>](#db_utils) <a name="db_utils.join_full" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin\raw/wrapper.js#L289" title="wrapper.js:289"><small>(defined@289)</small></a>  
+**Kind**: static constant of [<code>db\_utils</code>](#db_utils) <a name="db_utils.join_full" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin\raw/wrapper.js#L290" title="wrapper.js:290"><small>(defined@290)</small></a>  
 **Properties**
 
 | Type |
@@ -157,7 +158,7 @@ tb.table.chain().transform(db_utils.join_full, { data: tb.another_table.chain(),
 
 Využívá [join_step](#db_utils..join_step)
 
-**Kind**: static constant of [<code>db\_utils</code>](#db_utils) <a name="db_utils.join_inner" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin\raw/wrapper.js#L301" title="wrapper.js:301"><small>(defined@301)</small></a>  
+**Kind**: static constant of [<code>db\_utils</code>](#db_utils) <a name="db_utils.join_inner" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin\raw/wrapper.js#L302" title="wrapper.js:302"><small>(defined@302)</small></a>  
 **Properties**
 
 | Type |
@@ -178,7 +179,7 @@ tb.table.chain().transform(db_utils.join_inner, { data: tb.another_table.chain()
 
 Využívá [join_step](#db_utils..join_step)
 
-**Kind**: static constant of [<code>db\_utils</code>](#db_utils) <a name="db_utils.join_left" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin\raw/wrapper.js#L317" title="wrapper.js:317"><small>(defined@317)</small></a>  
+**Kind**: static constant of [<code>db\_utils</code>](#db_utils) <a name="db_utils.join_left" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin\raw/wrapper.js#L318" title="wrapper.js:318"><small>(defined@318)</small></a>  
 **Properties**
 
 | Type |
@@ -199,7 +200,7 @@ tb.table.chain().transform(db_utils.join_left, { data: tb.another_table.chain(),
 
 Využívá [join_step](#db_utils..join_step)
 
-**Kind**: static constant of [<code>db\_utils</code>](#db_utils) <a name="db_utils.join_right" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin\raw/wrapper.js#L333" title="wrapper.js:333"><small>(defined@333)</small></a>  
+**Kind**: static constant of [<code>db\_utils</code>](#db_utils) <a name="db_utils.join_right" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin\raw/wrapper.js#L334" title="wrapper.js:334"><small>(defined@334)</small></a>  
 **Properties**
 
 | Type |
@@ -218,7 +219,7 @@ tb.table.chain().transform(db_utils.join_right, { data: tb.another_table.chain()
 ### db_utils.save\_(database) ⇒ <code>Promise</code>
 >Uložení změn v databázi
 
-**Kind**: static method of [<code>db\_utils</code>](#db_utils) <a name="db_utils.save_" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin\raw/wrapper.js#L348" title="wrapper.js:348"><small>(defined@348)</small></a>  
+**Kind**: static method of [<code>db\_utils</code>](#db_utils) <a name="db_utils.save_" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin\raw/wrapper.js#L349" title="wrapper.js:349"><small>(defined@349)</small></a>  
 **.then**: <code>undefined</code> Volá se při úspěchu  
 **.catch**: <code>Error</code> Volá se při chybě `Error`  
 
@@ -234,7 +235,7 @@ tb.table.chain().transform(db_utils.join_right, { data: tb.another_table.chain()
 ### db_utils.upsertByQuery(collection, updated_data, query) ⇒ <code>number</code>
 >Pomocná funkce pro vložení/aktualizování záznamu v tabulce `colection`.
 
-**Kind**: static method of [<code>db\_utils</code>](#db_utils) <a name="db_utils.upsertByQuery" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin\raw/wrapper.js#L363" title="wrapper.js:363"><small>(defined@363)</small></a>  
+**Kind**: static method of [<code>db\_utils</code>](#db_utils) <a name="db_utils.upsertByQuery" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin\raw/wrapper.js#L364" title="wrapper.js:364"><small>(defined@364)</small></a>  
 **Returns**: <code>number</code> - 0/1 záznam aktualizován/vložen  
 
 | Param | Type | Description |
@@ -255,14 +256,14 @@ db.utils.upsertByQuery(tb.tabulka, { age: 28 }, { $and: [ { name: "Jan" }, { sur
 ### db_utils.upsertByKey(collection, updated_data, [key]) ⇒ <code>number</code>
 >Pomocná funkce pro vložení/aktualizování záznamu v tabulce `colection`.
 
-**Kind**: static method of [<code>db\_utils</code>](#db_utils) <a name="db_utils.upsertByKey" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin\raw/wrapper.js#L383" title="wrapper.js:383"><small>(defined@383)</small></a>  
+**Kind**: static method of [<code>db\_utils</code>](#db_utils) <a name="db_utils.upsertByKey" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin\raw/wrapper.js#L384" title="wrapper.js:384"><small>(defined@384)</small></a>  
 **Returns**: <code>number</code> - 0/1 záznam aktualizován/vložen  
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
 | collection | [<code>TABULKA</code>](#types.TABULKA) |  | Cílová tabulka |
 | updated_data | [<code>DATA</code>](#types.DATA) |  | Aktualizovaná data (předávaná referencí!) |
-| [key] | <code>string</code> | <code>&quot;id&quot;</code> | Jméno obecného klíče, které slouží jako identifikátor pro [tb.findOne](tb.findOne) |
+| [key] | <code>string</code> | <code>&quot;id&quot;</code> | Jméno obecného klíče, které slouží vlastně jako identifikátor pro [tb.findOne](tb.findOne) (`{ [key]: updated_data[key] }`) |
 
 **Example**  
 ```js
@@ -277,7 +278,7 @@ db.utils.upsertByKey(tb.tabulka, { key: 15, age: 28 }, "key");
 ### db_utils.upsertByUnique(collection, updated_data, [key]) ⇒ <code>number</code>
 >Pomocná funkce pro vložení/aktualizování záznamu v tabulce `colection`.
 
-**Kind**: static method of [<code>db\_utils</code>](#db_utils) <a name="db_utils.upsertByUnique" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin\raw/wrapper.js#L406" title="wrapper.js:406"><small>(defined@406)</small></a>  
+**Kind**: static method of [<code>db\_utils</code>](#db_utils) <a name="db_utils.upsertByUnique" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin\raw/wrapper.js#L407" title="wrapper.js:407"><small>(defined@407)</small></a>  
 **Returns**: <code>number</code> - 0/1 záznam aktualizován/vložen  
 **Throws**:
 
@@ -305,7 +306,7 @@ db.utils.upsertByUnique(tb.tabulka, { id: 1, age: 28 }, "id");
 ### db_utils.upsertByCallbacks(collection, updateInsert, find) ⇒ <code>function</code>
 >**WIP**
 
-**Kind**: static method of [<code>db\_utils</code>](#db_utils) <a name="db_utils.upsertByCallbacks" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin\raw/wrapper.js#L427" title="wrapper.js:427"><small>(defined@427)</small></a>  
+**Kind**: static method of [<code>db\_utils</code>](#db_utils) <a name="db_utils.upsertByCallbacks" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin\raw/wrapper.js#L428" title="wrapper.js:428"><small>(defined@428)</small></a>  
 
 | Param | Type |
 | --- | --- |
@@ -321,7 +322,7 @@ db.utils.upsertByUnique(tb.tabulka, { id: 1, age: 28 }, "id");
 ### db_utils~join\_step
 >Krok v [typpes.DB_TRANSFORMACE](typpes.DB_TRANSFORMACE) sloužící k fyzickému sloučení záznamů.
 
-**Kind**: inner constant of [<code>db\_utils</code>](#db_utils) <a name="db_utils..join_step" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin\raw/wrapper.js#L274" title="wrapper.js:274"><small>(defined@274)</small></a>  
+**Kind**: inner constant of [<code>db\_utils</code>](#db_utils) <a name="db_utils..join_step" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin\raw/wrapper.js#L275" title="wrapper.js:275"><small>(defined@275)</small></a>  
 
 | Param | Type | Description |
 | --- | --- | --- |

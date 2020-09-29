@@ -22,7 +22,7 @@ export function upsertByQuery(collection, updated_data, query){
  * @memberof db_utils
  * @param {types.TABULKA} collection Cílová tabulka
  * @param {types.DATA} updated_data Aktualizovaná data (předávaná referencí!)
- * @param {string} [key=id] Jméno obecného klíče, které slouží jako identifikátor pro {@link tb.findOne}
+ * @param {string} [key=id] Jméno obecného klíče, které slouží vlastně jako identifikátor pro {@link tb.findOne} (`{ [key]: updated_data[key] }`)
  * @returns {number} 0/1 záznam aktualizován/vložen
  * @example
  * db.utils.upsertByKey(tb.tabulka, { id: 15, age: 28 });
