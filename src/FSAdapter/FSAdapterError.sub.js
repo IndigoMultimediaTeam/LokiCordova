@@ -1,6 +1,9 @@
 gulp_place("./_classCallCheck.sub.js", "file_once");/* global _classCallCheck */
 gulp_place("./_inherits.sub.js", "file_once");/* global _inherits */
-
+/**
+ * @class FSAdapterError
+ * @public
+ */
 export var FSAdapterError = (function (_Error) {
     function FSAdapterError() {
         _classCallCheck(this, FSAdapterError);

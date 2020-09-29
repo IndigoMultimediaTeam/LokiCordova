@@ -22,13 +22,18 @@
 }(typeof self !== 'undefined' ? self : this, function (/* ..._dependencies */) {
     "use strict";
     var _dependencies= Array.prototype.slice.call(arguments);
+    /**
+     * [JSDoc: Class: Loki](http://techfort.github.io/LokiJS/Loki.html)
+     * @class loki
+     * @private
+     */
     const LokiJS= _dependencies[0];
     /**
+     * Typy v rámci [Loki](http://techfort.github.io/LokiJS) databáze a nebo v rámci této knihovny.
      * @namespace types
-     * @inner
      */
     /**
-     * Instance `loki`, viz [JSDoc: Class: Loki](http://techfort.github.io/LokiJS/Loki.html).
+     * Instance `loki` (resp. {@link LokiWithUtils}), viz [JSDoc: Class: Loki](http://techfort.github.io/LokiJS/Loki.html).
      * @typedef {Object} DATABAZE
      * @memberof types
      */
@@ -78,9 +83,21 @@
      * @typedef {Object[]} DB_TRANSFORMACE
      * @memberof types
      */
+    /**
+     * Parametry pro inicializaci [JSDoc: Class: Loki](http://techfort.github.io/LokiJS/Loki.html#Loki).
+     * @typedef {object} loki_options
+     * @memberof types
+     */
     /* cordova *//* global cordova *///gulp.keep.line
     
     function defaultOptions(){
+        /**
+         * Parametry pro {@link FSAdapter}
+         * @memberof types
+         * @typedef {object} FSAdapter_options
+         * @param {string} [prefix=loki] Pro ukládání se používá jméno databáze z `loki` a prefix, definovaný zde.
+         * @param {string} [target_location=cordova.file.dataDirectory] Cesta pro uložení databáze
+         */
         return {
             prefix: "loki",
             target_location: cordova.file.dataDirectory
@@ -106,7 +123,12 @@
     };
 
     var Object_assign= Object.assign;
-    
+    /**
+     * Třída (adaptér) pro ukládání `loki` v cordově do souborů.
+     * @class FSAdapter
+     * @public
+     * @param {types.FSAdapter_options} options 
+     */
     function FSAdapter(options) {
         _classCallCheck(this, FSAdapter);
         this.options= Object_assign(defaultOptions(), options);
@@ -124,7 +146,10 @@
         if(superClass) subClass.__proto__= superClass;
         /* jshint ignore:end *///gulp.keep.line
     };
-    
+    /**
+     * @class FSAdapterError
+     * @public
+     */
     var FSAdapterError = (function (_Error) {
         function FSAdapterError() {
             _classCallCheck(this, FSAdapterError);
@@ -259,7 +284,6 @@
     /**
      * Jmenný prostor obsahující pomocné utility pro práci s tabulkami/databází
      * @namespace db_utils
-     * @inner
      * @private
      */
     const loki_utils= (function loki_utils_iief(){
@@ -282,10 +306,10 @@
          * Transformace pro {@link db} zjednodušující joinováni v rámci LokiJS. Vrátí výsledky z pravé/levé tabulky nezávisle na tom, zda jsou prázdné.
          * 
          * Využívá {@link db_utils~join_step}
-         * @property {db_utils~DB_TRANSFORMACE}
+         * @property {types.DB_TRANSFORMACE}
          * @memberof db_utils
-         * @example
-         * tb.table.chain().transform(db_utils.join_full, { data: tb.another_table.chain(), left_key: "left_key", right_key: "right_key" }).data();
+         * @example <caption>Pokud `tb` a `db` dle funkce `database_`</caption>
+         * tb.table.chain().transform(db.utils.join_full, { data: tb.another_table.chain(), left_key: "left_key", right_key: "right_key" }).data();
          */
         const join_full= [
             join_step
@@ -294,10 +318,10 @@
          * Transformace pro {@link db} zjednodušující joinováni v rámci LokiJS. Vrátí výsledky z pravé/levé tabulky pouze pokud jsou neprázdné.
          * 
          * Využívá {@link db_utils~join_step}
-         * @property {db_utils~DB_TRANSFORMACE}
+         * @property {types.DB_TRANSFORMACE}
          * @memberof db_utils
-         * @example
-         * tb.table.chain().transform(db_utils.join_inner, { data: tb.another_table.chain(), left_key: "left_key", right_key: "right_key" }).data();
+         * @example <caption>Pokud `tb` a `db` dle funkce `database_`</caption>
+         * tb.table.chain().transform(db.utils.join_inner, { data: tb.another_table.chain(), left_key: "left_key", right_key: "right_key" }).data();
          */
         const join_inner= [
             join_step,
@@ -310,10 +334,10 @@
          * Transformace pro {@link db} zjednodušující joinováni v rámci LokiJS. Vrátí výsledky z levé tabulky a korespondující záznamy z pravé (pokud existují).
          * 
          * Využívá {@link db_utils~join_step}
-         * @property {db_utils~DB_TRANSFORMACE}
+         * @property {types.DB_TRANSFORMACE}
          * @memberof db_utils
-         * @example
-         * tb.table.chain().transform(db_utils.join_left, { data: tb.another_table.chain(), left_key: "left_key", right_key: "right_key" }).data();
+         * @example <caption>Pokud `tb` a `db` dle funkce `database_`</caption>
+         * tb.table.chain().transform(db.utils.join_left, { data: tb.another_table.chain(), left_key: "left_key", right_key: "right_key" }).data();
          */
         const join_left= [
             join_step,
@@ -326,10 +350,10 @@
          * Transformace pro {@link db} zjednodušující joinováni v rámci LokiJS. Vrátí výsledky z pravé tabulky a korespondující záznamy z levé (pokud existují).
          * 
          * Využívá {@link db_utils~join_step}
-         * @property {db_utils~DB_TRANSFORMACE}
+         * @property {types.DB_TRANSFORMACE}
          * @memberof db_utils
-         * @example
-         * tb.table.chain().transform(db_utils.join_right, { data: tb.another_table.chain(), left_key: "left_key", right_key: "right_key" }).data();
+         * @example <caption>Pokud `tb` a `db` dle funkce `database_`</caption>
+         * tb.table.chain().transform(db.utils.join_right, { data: tb.another_table.chain(), left_key: "left_key", right_key: "right_key" }).data();
          */
         const join_right= [
             join_step,
@@ -358,7 +382,7 @@
          * @param {types.DATA} updated_data Aktualizovaná data (předávaná referencí!)
          * @param {types.DOTAZ} query Argument pro {@link tb.findOne}
          * @returns {number} 0/1 záznam aktualizován/vložen
-         * @example
+         * @example <caption>Pokud `tb` a `db` dle funkce `database_`</caption>
          * db.utils.upsertByQuery(tb.tabulka, { age: 28 }, { $and: [ { name: "Jan" }, { surname: "Andrle" } ] });
          */
         function upsertByQuery(collection, updated_data, query){
@@ -377,7 +401,7 @@
          * @param {types.DATA} updated_data Aktualizovaná data (předávaná referencí!)
          * @param {string} [key=id] Jméno obecného klíče, které slouží vlastně jako identifikátor pro {@link tb.findOne} (`{ [key]: updated_data[key] }`)
          * @returns {number} 0/1 záznam aktualizován/vložen
-         * @example
+         * @example <caption>Pokud `tb` a `db` dle funkce `database_`</caption>
          * db.utils.upsertByKey(tb.tabulka, { id: 15, age: 28 });
          * db.utils.upsertByKey(tb.tabulka, { key: 15, age: 28 }, "key");
          */
@@ -398,7 +422,7 @@
          * @param {string} [key=id] Jméno unikátního klíče, které slouží jako identifikátor pro [`Collection.prototype.by`](http://techfort.github.io/LokiJS/lokijs.js.html#line6608) nebo [`Collection.prototype.get`](http://techfort.github.io/LokiJS/lokijs.js.html#line6109) (tedy "$loki").
          * @returns {number} 0/1 záznam aktualizován/vložen
          * @throws {Error} Vyhodí chybu pokud je `key="$loki"` a aktualizovaná data obsahují tuto hodnotu vyplněnou (`{ $loki: 15, … }`) – přičemž není v databázi. Jde totiž o to, že `$loki` se autoinkrementuje! Takže jiná hodnota než již existující (aktualizace záznamu) či prázdná (přidání) nedává smysl.
-         * @example
+         * @example <caption>Pokud `tb` a `db` dle funkce `database_`</caption>
          * db.utils.upsertByUnique(tb.tabulka, { $loki: 1, age: 28 });
          * db.utils.upsertByUnique(tb.tabulka, { age: 28 });
          * 
@@ -438,16 +462,42 @@
         }
         return { join_full, join_inner, join_left, join_right, save_, upsertByQuery, upsertByKey, upsertByUnique, upsertByCallbacks };
     })();
-    
+    /**
+     * Třída rozšiřující `Loki` o {@link db_utils} a unifikované zavádění.
+     * @private
+     * @extends loki
+     */
     class LokiWithUtils extends LokiJS{
+        /**
+         * Interně inicializuje {@link loki}
+         * @param {string} file Jméno souboru pro `loki`
+         * @param {types.loki_option} params Parametry pro `loki`
+         */
         constructor(file, params){
             super(file, params);
             if(this.utils) throw new Error("LokiWithUtils is not supported with current version of LokiJS!!!");
+            /**
+             * @property {object} utils Viz jmenný prostor {@link db_utils}.
+             */
             this.utils= loki_utils;
         }
+        /**
+         * Uložení {@link types.DATABAZE} (u nás typicky )
+         * @returns {Promise} Viz {@link db_utils.save_}
+         * @example <caption>Pokud `tb` a `db` dle funkce `database_`</caption>
+         * db.save()_.then(console.log).catch(console.error);
+         */
         save_(){
             return this.utils.save_(this);
         }
+        /**
+         * Zavedení databáze
+         * @param {string} file Jméno souboru pro `loki`
+         * @param {object} params Parametry pro `loki`
+         * @returns {Promise}
+         * @.then {LokiWithUtils} `db` Instance `loki`, tj. konkrétní databáze.
+         * @.catch {Error}
+         */
         static create_(file, params){
             var db;
             return new Promise((resolve, reject)=> {
@@ -460,7 +510,21 @@
             });
         }
     }
-    
+    /**
+     * Veřejná funkce pro inicializaci databáze pro {@link LokiWithUtils}.
+     * @method database_
+     * @public
+     * @param {object} def
+     * @param {object} def.db_file
+     * @param {string} [def.db_file.file=db.json] Pro `loki` se jedná o jméno databáze, pro nás i výsledné jméno souboru (viz také `db_file.prefix`).
+     * @param {string} [def.db_file.prefix=loki] Prefix pro název souboru
+     * @param {types.loki_options} [def.params={autoload:true}]
+     * @param {string[]} [def.tables=[]] Jména tabulek (N). Tento seznam se porovná s interním (I) seznamem. Tyto seznamy se porovnají a případně se vytvoří/smažou tabulky (např. tabulky v N, které nejsou v I se smažou v databázi).
+     * @param {boolean} [def.auto_cordova_adapter=true] Nastavení/autonačtení ukládání pomocí {@link FSAdapter}.
+     * @returns {Promise}
+     * @.then {object} {db: {@link types.DATABAZE}, tb: {@link types.TABULKA}[]}
+     * @.catch {Error}
+     */
     function database_({
         db_file: { file= "db.json", prefix= "loki" }= {},
         params= { autoload: true },

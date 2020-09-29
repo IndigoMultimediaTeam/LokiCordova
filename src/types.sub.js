@@ -1,9 +1,9 @@
 /**
+ * Typy v rámci [Loki](http://techfort.github.io/LokiJS) databáze a nebo v rámci této knihovny.
  * @namespace types
- * @inner
  */
 /**
- * Instance `loki`, viz [JSDoc: Class: Loki](http://techfort.github.io/LokiJS/Loki.html).
+ * Instance `loki` (resp. {@link LokiWithUtils}), viz [JSDoc: Class: Loki](http://techfort.github.io/LokiJS/Loki.html).
  * @typedef {Object} DATABAZE
  * @memberof types
  */
@@ -51,5 +51,10 @@
  * - [`*.transform(transform: **DB_TRANSFORMS**, parameters: **object**)`](http://techfort.github.io/LokiJS/Resultset.html#transform)
  * - [*.chain(transform: **DB_TRANSFORMS**, parameters: **object**)](http://techfort.github.io/LokiJS/Collection.html#chain)
  * @typedef {Object[]} DB_TRANSFORMACE
+ * @memberof types
+ */
+/**
+ * Parametry pro inicializaci [JSDoc: Class: Loki](http://techfort.github.io/LokiJS/Loki.html#Loki).
+ * @typedef {object} loki_options
  * @memberof types
  */

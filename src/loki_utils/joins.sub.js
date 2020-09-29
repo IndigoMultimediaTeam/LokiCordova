@@ -17,10 +17,10 @@ const join_step= {
  * Transformace pro {@link db} zjednodušující joinováni v rámci LokiJS. Vrátí výsledky z pravé/levé tabulky nezávisle na tom, zda jsou prázdné.
  * 
  * Využívá {@link db_utils~join_step}
- * @property {db_utils~DB_TRANSFORMACE}
+ * @property {types.DB_TRANSFORMACE}
  * @memberof db_utils
- * @example
- * tb.table.chain().transform(db_utils.join_full, { data: tb.another_table.chain(), left_key: "left_key", right_key: "right_key" }).data();
+ * @example <caption>Pokud `tb` a `db` dle funkce `database_`</caption>
+ * tb.table.chain().transform(db.utils.join_full, { data: tb.another_table.chain(), left_key: "left_key", right_key: "right_key" }).data();
  */
 export const join_full= [
     join_step
@@ -29,10 +29,10 @@ export const join_full= [
  * Transformace pro {@link db} zjednodušující joinováni v rámci LokiJS. Vrátí výsledky z pravé/levé tabulky pouze pokud jsou neprázdné.
  * 
  * Využívá {@link db_utils~join_step}
- * @property {db_utils~DB_TRANSFORMACE}
+ * @property {types.DB_TRANSFORMACE}
  * @memberof db_utils
- * @example
- * tb.table.chain().transform(db_utils.join_inner, { data: tb.another_table.chain(), left_key: "left_key", right_key: "right_key" }).data();
+ * @example <caption>Pokud `tb` a `db` dle funkce `database_`</caption>
+ * tb.table.chain().transform(db.utils.join_inner, { data: tb.another_table.chain(), left_key: "left_key", right_key: "right_key" }).data();
  */
 export const join_inner= [
     join_step,
@@ -45,10 +45,10 @@ export const join_inner= [
  * Transformace pro {@link db} zjednodušující joinováni v rámci LokiJS. Vrátí výsledky z levé tabulky a korespondující záznamy z pravé (pokud existují).
  * 
  * Využívá {@link db_utils~join_step}
- * @property {db_utils~DB_TRANSFORMACE}
+ * @property {types.DB_TRANSFORMACE}
  * @memberof db_utils
- * @example
- * tb.table.chain().transform(db_utils.join_left, { data: tb.another_table.chain(), left_key: "left_key", right_key: "right_key" }).data();
+ * @example <caption>Pokud `tb` a `db` dle funkce `database_`</caption>
+ * tb.table.chain().transform(db.utils.join_left, { data: tb.another_table.chain(), left_key: "left_key", right_key: "right_key" }).data();
  */
 export const join_left= [
     join_step,
@@ -61,10 +61,10 @@ export const join_left= [
  * Transformace pro {@link db} zjednodušující joinováni v rámci LokiJS. Vrátí výsledky z pravé tabulky a korespondující záznamy z levé (pokud existují).
  * 
  * Využívá {@link db_utils~join_step}
- * @property {db_utils~DB_TRANSFORMACE}
+ * @property {types.DB_TRANSFORMACE}
  * @memberof db_utils
- * @example
- * tb.table.chain().transform(db_utils.join_right, { data: tb.another_table.chain(), left_key: "left_key", right_key: "right_key" }).data();
+ * @example <caption>Pokud `tb` a `db` dle funkce `database_`</caption>
+ * tb.table.chain().transform(db.utils.join_right, { data: tb.another_table.chain(), left_key: "left_key", right_key: "right_key" }).data();
  */
 export const join_right= [
     join_step,

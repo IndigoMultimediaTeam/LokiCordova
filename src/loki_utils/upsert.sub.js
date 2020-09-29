@@ -5,7 +5,7 @@
  * @param {types.DATA} updated_data Aktualizovaná data (předávaná referencí!)
  * @param {types.DOTAZ} query Argument pro {@link tb.findOne}
  * @returns {number} 0/1 záznam aktualizován/vložen
- * @example
+ * @example <caption>Pokud `tb` a `db` dle funkce `database_`</caption>
  * db.utils.upsertByQuery(tb.tabulka, { age: 28 }, { $and: [ { name: "Jan" }, { surname: "Andrle" } ] });
  */
 export function upsertByQuery(collection, updated_data, query){
@@ -24,7 +24,7 @@ export function upsertByQuery(collection, updated_data, query){
  * @param {types.DATA} updated_data Aktualizovaná data (předávaná referencí!)
  * @param {string} [key=id] Jméno obecného klíče, které slouží vlastně jako identifikátor pro {@link tb.findOne} (`{ [key]: updated_data[key] }`)
  * @returns {number} 0/1 záznam aktualizován/vložen
- * @example
+ * @example <caption>Pokud `tb` a `db` dle funkce `database_`</caption>
  * db.utils.upsertByKey(tb.tabulka, { id: 15, age: 28 });
  * db.utils.upsertByKey(tb.tabulka, { key: 15, age: 28 }, "key");
  */
@@ -45,7 +45,7 @@ export function upsertByKey(collection, updated_data, key= "id"){
  * @param {string} [key=id] Jméno unikátního klíče, které slouží jako identifikátor pro [`Collection.prototype.by`](http://techfort.github.io/LokiJS/lokijs.js.html#line6608) nebo [`Collection.prototype.get`](http://techfort.github.io/LokiJS/lokijs.js.html#line6109) (tedy "$loki").
  * @returns {number} 0/1 záznam aktualizován/vložen
  * @throws {Error} Vyhodí chybu pokud je `key="$loki"` a aktualizovaná data obsahují tuto hodnotu vyplněnou (`{ $loki: 15, … }`) – přičemž není v databázi. Jde totiž o to, že `$loki` se autoinkrementuje! Takže jiná hodnota než již existující (aktualizace záznamu) či prázdná (přidání) nedává smysl.
- * @example
+ * @example <caption>Pokud `tb` a `db` dle funkce `database_`</caption>
  * db.utils.upsertByUnique(tb.tabulka, { $loki: 1, age: 28 });
  * db.utils.upsertByUnique(tb.tabulka, { age: 28 });
  * 
