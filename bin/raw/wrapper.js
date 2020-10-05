@@ -288,7 +288,7 @@
      */
     const loki_utils= (function loki_utils_iief(){
         /**
-         * Krok v {@link typpes.DB_TRANSFORMACE} sloužící k fyzickému sloučení záznamů.
+         * Krok v {@link types.DB_TRANSFORMACE} sloužící k fyzickému sloučení záznamů. Vždy se jedná o "Left Join" transformované tabulky!
          * @property {object}
          * @param {object[]|types.RADEK[]|types.TABULKA} data Odpovídá `joinData` v [eqJoin](http://techfort.github.io/LokiJS/Collection.html#eqJoin)
          * @param {string} left_key Jméno klíče ke sloučení v levé tabulce
@@ -303,63 +303,31 @@
             rightJoinKey: "[%lktxp]right_key",
         };
         /**
-         * Transformace pro {@link db} zjednodušující joinováni v rámci LokiJS. Vrátí výsledky z pravé/levé tabulky nezávisle na tom, zda jsou prázdné.
+         * Transformace pro {@link db} zjednodušující joinováni v rámci LokiJS. Vrátí výsledky z hlavní ("levé") tabulky a korespondující záznam z pravé (případně prázdný objekt).
          * 
          * Využívá {@link db_utils~join_step}
          * @property {types.DB_TRANSFORMACE}
          * @memberof db_utils
          * @example <caption>Pokud `tb` a `db` dle funkce `database_`</caption>
-         * tb.table.chain().transform(db.utils.join_full, { data: tb.another_table.chain(), left_key: "left_key", right_key: "right_key" }).data();
+         * tb.table.chain().transform(db.utils.left_join, { data: tb.another_table.chain(), left_key: "left_key", right_key: "right_key" }).data();
          */
-        const join_full= [
+        const left_join= [
             join_step
         ];
         /**
-         * Transformace pro {@link db} zjednodušující joinováni v rámci LokiJS. Vrátí výsledky z pravé/levé tabulky pouze pokud jsou neprázdné.
+         * Transformace pro {@link db} zjednodušující joinováni v rámci LokiJS. Vrátí výsledky z hlavní ("levé") tabulky a korespondující záznamy z pravé (pokud existují).
          * 
          * Využívá {@link db_utils~join_step}
          * @property {types.DB_TRANSFORMACE}
          * @memberof db_utils
          * @example <caption>Pokud `tb` a `db` dle funkce `database_`</caption>
-         * tb.table.chain().transform(db.utils.join_inner, { data: tb.another_table.chain(), left_key: "left_key", right_key: "right_key" }).data();
+         * tb.table.chain().transform(db.utils.left_join_strict, { data: tb.another_table.chain(), left_key: "left_key", right_key: "right_key" }).data();
          */
-        const join_inner= [
+        const left_join_strict= [
             join_step,
             {
                 type: "where",
-                value: ({ left, right })=> Boolean(left)&&Boolean(right)
-            }
-        ];
-        /**
-         * Transformace pro {@link db} zjednodušující joinováni v rámci LokiJS. Vrátí výsledky z levé tabulky a korespondující záznamy z pravé (pokud existují).
-         * 
-         * Využívá {@link db_utils~join_step}
-         * @property {types.DB_TRANSFORMACE}
-         * @memberof db_utils
-         * @example <caption>Pokud `tb` a `db` dle funkce `database_`</caption>
-         * tb.table.chain().transform(db.utils.join_left, { data: tb.another_table.chain(), left_key: "left_key", right_key: "right_key" }).data();
-         */
-        const join_left= [
-            join_step,
-            {
-                type: "where",
-                value: ({ left })=> Boolean(left)
-            }
-        ];
-        /**
-         * Transformace pro {@link db} zjednodušující joinováni v rámci LokiJS. Vrátí výsledky z pravé tabulky a korespondující záznamy z levé (pokud existují).
-         * 
-         * Využívá {@link db_utils~join_step}
-         * @property {types.DB_TRANSFORMACE}
-         * @memberof db_utils
-         * @example <caption>Pokud `tb` a `db` dle funkce `database_`</caption>
-         * tb.table.chain().transform(db.utils.join_right, { data: tb.another_table.chain(), left_key: "left_key", right_key: "right_key" }).data();
-         */
-        const join_right= [
-            join_step,
-            {
-                type: "where",
-                value: ({ right })=> Boolean(right)
+                value: ({ right })=> right&&typeof right.$loki!== "undefined"
             }
         ];
         /**
@@ -460,7 +428,7 @@
                 return 1;
             };
         }
-        return { join_full, join_inner, join_left, join_right, save_, upsertByQuery, upsertByKey, upsertByUnique, upsertByCallbacks };
+        return { left_join, left_join_strict, save_, upsertByQuery, upsertByKey, upsertByUnique, upsertByCallbacks };
     })();
     /**
      * Třída rozšiřující `Loki` o {@link db_utils} a unifikované zavádění.

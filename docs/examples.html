@@ -5,15 +5,79 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <title>LokiCordova — Examples</title>
-    <script src="../bin/LokiCordova.min.js"></script>
+    <script src="../bin/LokiCordova.min.js?v="1.0.0""></script>
+    <link rel="stylesheet" href="examples_files/examples.css">
 </head>
 <body>
     <script>
+        localStorage.clear();
         function database_(name= "db.json", tables= [], init_data= undefined){
             if(init_data)
                 localStorage.setItem(name, init_data.replace(/"filename":"[^"]+",/, `"filename":"${name}",`));
             return LokiCordova.database_({ db_file: { file: name }, tables, auto_cordova_adapter: false });
         }
     </script>
+    <article>
+        <h1>"LokiCordova" — Examples</h1>
+        <a href=""https://github.com/IndigoMultimediaTeam/LokiCordova#readme"">⇠ Go back to GitHub repository</a>
+
+        
+        <script contenteditable="">
+            database_("test1", [ "users", "notes" ])
+            .then(function({ db, tb }){
+                tb.users.insert([
+                    { id: 1, name: "Jan" },
+                    { id: 2, name: "Ivana" },
+                    { id: 3, name: "Peter" },
+                    { id: 4, name: "Amanda" },
+                    { id: 5, name: "Thor" },
+                    { id: 6, name: "Adéla" }
+                ]);
+                tb.notes.insert([
+                    { id: 1, id_user: 1, text: "1-1" },
+                    { id: 2, id_user: 1, text: "2-1" },
+                    { id: 3, id_user: 2, text: "3-2" },
+                    { id: 4, id_user: 9, text: "4-9" },
+                    { id: 5, id_user: 8, text: "5-8" }
+                ]);
+                db.saveDatabase();
+        
+                let join_params, joinMapData;
+                
+                join_params= { data: tb.users, left_key: "id_user", right_key: "id" };
+                joinMapData= ({ left: { text }, right: { name } })=> ({ name, text });
+                const notes_left_join=
+                    tb.notes
+                    .chain(db.utils.left_join, join_params)
+                    .data()
+                    .map(joinMapData);
+                const notes_left_join_strict=
+                    tb.notes
+                    .chain(db.utils.left_join_strict, join_params)
+                    .data()
+                    .map(joinMapData);
+                
+                join_params= { data: tb.notes, left_key: "id", right_key: "id_user" };
+                joinMapData= ({ left: { name }, right: { text } })=> ({ name, text });
+                const users_left_join=
+                    tb.users
+                    .chain(db.utils.left_join, join_params)
+                    .data()
+                    .map(joinMapData);
+                const users_left_join_strict=
+                    tb.users
+                    .chain(db.utils.left_join_strict, join_params)
+                    .data()
+                    .map(joinMapData);
+                
+                console.log({
+                    notes_left_join,
+                    notes_left_join_strict,
+                    users_left_join,
+                    users_left_join_strict
+                });
+            });
+        </script>
+    </article>
 </body>
 </html>
