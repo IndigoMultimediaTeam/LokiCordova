@@ -5,15 +5,23 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <title>LokiCordova — Examples</title>
-    <script src="../bin/LokiCordova.min.js"></script>
+    <script src="../bin/LokiCordova.min.js?v=gulp_place('app.version', 'variable')"></script>
+    <link rel="stylesheet" href="examples_files/examples.css">
 </head>
 <body>
     <script>
+        localStorage.clear();
         function database_(name= "db.json", tables= [], init_data= undefined){
             if(init_data)
                 localStorage.setItem(name, init_data.replace(/"filename":"[^"]+",/, `"filename":"${name}",`));
             return LokiCordova.database_({ db_file: { file: name }, tables, auto_cordova_adapter: false });
         }
     </script>
+    <article>
+        <h1>gulp_place("app.name", "variable") — Examples</h1>
+        <a href="gulp_place('app.homepage', 'variable')">⇠ Go back to GitHub repository</a>
+
+        gulp_place("./examples/*.sub.html", "glob_once");
+    </article>
 </body>
 </html>
