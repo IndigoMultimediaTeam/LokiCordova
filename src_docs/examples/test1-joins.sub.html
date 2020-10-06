@@ -2,74 +2,76 @@
 <p></p>
 <pre class="output"></pre>
 <script contenteditable="">
-    const logOut= logOutBuilder(document.currentScript.previousElementSibling);
+    (function(){
+        const logOut= logOutBuilder(document.currentScript.previousElementSibling);
 
-    LokiCordova.database_({
-        db_file: { file: "test1" },
-        tables: [ "users", "notes" ],
-        auto_cordova_adapter: false
-    })
-    .then(function({ db, tb }){
-        logOut("", false);
+        LokiCordova.database_({
+            db_file: { file: "test1" },
+            tables: [ "users", "notes" ],
+            auto_cordova_adapter: false
+        })
+        .then(function({ db, db_utils, tb }){
+            logOut("", false);
 
-        tb.users.insert([
-            { id: 1, name: "Jan" },
-            { id: 2, name: "Ivana" },
-            { id: 3, name: "Peter" },
-            { id: 4, name: "Amanda" },
-            { id: 5, name: "Thor" },
-            { id: 6, name: "Adéla" }
-        ]);
-        tb.notes.insert([
-            { id: 1, id_user: 1, text: "1-1" },
-            { id: 2, id_user: 1, text: "2-1" },
-            { id: 3, id_user: 2, text: "3-2" },
-            { id: 4, id_user: 9, text: "4-9" },
-            { id: 5, id_user: 8, text: "5-8" }
-        ]);
-        db.saveDatabase();
+            tb.users.insert([
+                { id: 1, name: "Jan" },
+                { id: 2, name: "Ivana" },
+                { id: 3, name: "Peter" },
+                { id: 4, name: "Amanda" },
+                { id: 5, name: "Thor" },
+                { id: 6, name: "Adéla" }
+            ]);
+            tb.notes.insert([
+                { id: 1, id_user: 1, text: "1-1" },
+                { id: 2, id_user: 1, text: "2-1" },
+                { id: 3, id_user: 2, text: "3-2" },
+                { id: 4, id_user: 9, text: "4-9" },
+                { id: 5, id_user: 8, text: "5-8" }
+            ]);
+            db.saveDatabase();
 
-        let join_params, joinMapData;
-        
-        join_params= { data: tb.users, left_key: "id_user", right_key: "id" };
-        joinMapData= ({ left: { text }, right: { name } })=> ({ name, text });
-        const notes_left_join=
-            tb.notes
-            .chain(db.utils.left_join, join_params)
-            .data()
-            .map(joinMapData);
-        const notes_left_join_strict=
-            tb.notes
-            .chain(db.utils.left_join_strict, join_params)
-            .data()
-            .map(joinMapData);
+            let join_params, joinMapData;
+            
+            join_params= { data: tb.users, left_key: "id_user", right_key: "id" };
+            joinMapData= ({ left: { text }, right: { name } })=> ({ name, text });
+            const notes_left_join=
+                tb.notes
+                .chain(db_utils.left_join, join_params)
+                .data()
+                .map(joinMapData);
+            const notes_left_join_strict=
+                tb.notes
+                .chain(db_utils.left_join_strict, join_params)
+                .data()
+                .map(joinMapData);
 
-        logOut({ notes_left_join, notes_left_join_strict });
-        
-        join_params= { data: tb.notes, left_key: "id", right_key: "id_user" };
-        joinMapData= ({ left: { name }, right: { text } })=> ({ name, text });
-        const users_left_join=
-            tb.users
-            .chain(db.utils.left_join, join_params)
-            .data()
-            .map(joinMapData);
-        const users_left_join_strict=
-            tb.users
-            .chain(db.utils.left_join_strict, join_params)
-            .data()
-            .map(joinMapData);
-        
-        logOut({ users_left_join, users_left_join_strict });
+            logOut({ notes_left_join, notes_left_join_strict });
+            
+            join_params= { data: tb.notes, left_key: "id", right_key: "id_user" };
+            joinMapData= ({ left: { name }, right: { text } })=> ({ name, text });
+            const users_left_join=
+                tb.users
+                .chain(db_utils.left_join, join_params)
+                .data()
+                .map(joinMapData);
+            const users_left_join_strict=
+                tb.users
+                .chain(db_utils.left_join_strict, join_params)
+                .data()
+                .map(joinMapData);
+            
+            logOut({ users_left_join, users_left_join_strict });
 
-        /*····················TESTS····················*/
+            /*····················TESTS····················*/
 
-        test({ notes_left_join, notes_left_join_strict, users_left_join, users_left_join_strict },
-            {
-                notes_left_join: '[{"name":"Jan","text":"1-1"},{"name":"Jan","text":"2-1"},{"name":"Ivana","text":"3-2"},{"text":"4-9"},{"text":"5-8"}]',
-                notes_left_join_strict: '[{"name":"Ivana","text":"3-2"},{"name":"Jan","text":"2-1"},{"name":"Jan","text":"1-1"}]',
-                users_left_join: '[{"name":"Jan","text":"2-1"},{"name":"Ivana","text":"3-2"},{"name":"Peter"},{"name":"Amanda"},{"name":"Thor"},{"name":"Adéla"}]',
-                users_left_join_strict: '[{"name":"Ivana","text":"3-2"},{"name":"Jan","text":"2-1"}]'
-            }
-        );
-    });
+            test({ notes_left_join, notes_left_join_strict, users_left_join, users_left_join_strict },
+                {
+                    notes_left_join: '[{"name":"Jan","text":"1-1"},{"name":"Jan","text":"2-1"},{"name":"Ivana","text":"3-2"},{"text":"4-9"},{"text":"5-8"}]',
+                    notes_left_join_strict: '[{"name":"Ivana","text":"3-2"},{"name":"Jan","text":"2-1"},{"name":"Jan","text":"1-1"}]',
+                    users_left_join: '[{"name":"Jan","text":"2-1"},{"name":"Ivana","text":"3-2"},{"name":"Peter"},{"name":"Amanda"},{"name":"Thor"},{"name":"Adéla"}]',
+                    users_left_join_strict: '[{"name":"Ivana","text":"3-2"},{"name":"Jan","text":"2-1"}]'
+                }
+            );
+        });
+    })();
 </script>
