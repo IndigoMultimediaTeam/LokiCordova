@@ -1,0 +1,29 @@
+<h2>Ukázka a test `save_`</h2>
+<p></p>
+<pre class="output"></pre>
+<script contenteditable="">
+    (function(){
+        const logOut= logOutBuilder(document.currentScript.previousElementSibling);
+        let prev;
+
+        LokiCordova.database_({
+            db_file: { file: "test3" },
+            tables: [ "users" ],
+            auto_cordova_adapter: false
+        })
+        .then(function({ db, db_utils, tb }){
+            logOut("", false);
+            prev= localStorage.getItem("test3");
+
+            tb.users.insert([
+                { id: 1, name: "Jan", surname: "Andrle" },
+                { id: 2, name: "Anna", surname: "Nová" }
+            ]);
+            return db_utils.save_(db);
+        })
+        .then(function(){
+            const current= localStorage.getItem("test3");
+            return prev!==current ? console.log("Test proběhl úspěšně") : console.error("`test3`: Test proběhl neúspěšně");
+        });
+    })();
+</script>
