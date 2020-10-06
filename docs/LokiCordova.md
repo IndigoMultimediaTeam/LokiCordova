@@ -13,9 +13,6 @@
 <dd></dd>
 <dt><a href="#FSAdapterError">FSAdapterError</a></dt>
 <dd></dd>
-<dt><a href="#LokiWithUtils">LokiWithUtils</a> ⇐ <code><a href="#loki">loki</a></code> ℗</dt>
-<dd><p>Třída rozšiřující <code>Loki</code> o <a href="#db_utils">db_utils</a> a unifikované zavádění.</p>
-</dd>
 </dl>
 
 ## Objects
@@ -33,7 +30,7 @@
 
 <dl>
 <dt><a href="#database_">database_(def)</a> ⇒ <code>Promise</code></dt>
-<dd><p>Veřejná funkce pro inicializaci databáze pro <a href="#LokiWithUtils">LokiWithUtils</a>.</p>
+<dd><p>Veřejná funkce pro inicializaci databáze pro <a href="LokiWithUtils">LokiWithUtils</a>.</p>
 </dd>
 </dl>
 
@@ -86,84 +83,6 @@
 
 * * *
 
-<a name="LokiWithUtils"></a>
-
-## LokiWithUtils ⇐ [<code>loki</code>](#loki) ℗
->Třída rozšiřující `Loki` o [db_utils](#db_utils) a unifikované zavádění.
-
-**Kind**: global class <a name="LokiWithUtils" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin\raw/wrapper.js#L438" title="wrapper.js:438"><small>(defined@438)</small></a>  
-**Extends**: [<code>loki</code>](#loki)  
-**Access**: private  
-
-* [LokiWithUtils](#LokiWithUtils) ⇐ [<code>loki</code>](#loki) ℗
-    * [new LokiWithUtils(file, params)](#new_LokiWithUtils_new)
-    * _instance_
-        * [.utils](#LokiWithUtils+utils)
-        * [.save_()](#LokiWithUtils+save_) ⇒ <code>Promise</code>
-    * _static_
-        * [.create_(file, params)](#LokiWithUtils.create_) ⇒ <code>Promise</code>
-
-
-* * *
-
-<a name="new_LokiWithUtils_new"></a>
-
-### new LokiWithUtils(file, params)
->Interně inicializuje [loki](#loki)
-
-
-| Param | Type | Description |
-| --- | --- | --- |
-| file | <code>string</code> | Jméno souboru pro `loki` |
-| params | <code>types.loki\_option</code> | Parametry pro `loki` |
-
-
-* * *
-
-<a name="LokiWithUtils+utils"></a>
-
-### lokiWithUtils.utils
-**Kind**: instance property of [<code>LokiWithUtils</code>](#LokiWithUtils) <a name="LokiWithUtils+utils" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin\raw/wrapper.js#L450" title="wrapper.js:450"><small>(defined@450)</small></a>  
-**Properties**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| utils | <code>object</code> | Viz jmenný prostor [db_utils](#db_utils). |
-
-
-* * *
-
-<a name="LokiWithUtils+save_"></a>
-
-### lokiWithUtils.save\_() ⇒ <code>Promise</code>
->Uložení [DATABAZE](#types.DATABAZE) (u nás typicky )
-
-**Kind**: instance method of [<code>LokiWithUtils</code>](#LokiWithUtils) <a name="LokiWithUtils+save_" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin\raw/wrapper.js#L458" title="wrapper.js:458"><small>(defined@458)</small></a>  
-**Returns**: <code>Promise</code> - Viz [save_](#db_utils.save_)  
-**Example** *(Pokud &#x60;tb&#x60; a &#x60;db&#x60; dle funkce &#x60;database_&#x60;)*  
-```js
-db.save()_.then(console.log).catch(console.error);
-```
-
-* * *
-
-<a name="LokiWithUtils.create_"></a>
-
-### LokiWithUtils.create\_(file, params) ⇒ <code>Promise</code>
->Zavedení databáze
-
-**Kind**: static method of [<code>LokiWithUtils</code>](#LokiWithUtils) <a name="LokiWithUtils.create_" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin\raw/wrapper.js#L469" title="wrapper.js:469"><small>(defined@469)</small></a>  
-**.then**: [<code>LokiWithUtils</code>](#LokiWithUtils) `db` Instance `loki`, tj. konkrétní databáze.  
-**.catch**: <code>Error</code>  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| file | <code>string</code> | Jméno souboru pro `loki` |
-| params | <code>object</code> | Parametry pro `loki` |
-
-
-* * *
-
 <a name="types"></a>
 
 ## types : <code>object</code>
@@ -187,7 +106,7 @@ db.save()_.then(console.log).catch(console.error);
 <a name="types.DATABAZE"></a>
 
 ### types.DATABAZE : <code>Object</code>
->Instance `loki` (resp. [LokiWithUtils](#LokiWithUtils)), viz [JSDoc: Class: Loki](http://techfort.github.io/LokiJS/Loki.html).
+>Instance `loki` (resp. [LokiWithUtils](LokiWithUtils)), viz [JSDoc: Class: Loki](http://techfort.github.io/LokiJS/Loki.html).
 
 **Kind**: static typedef of [<code>types</code>](#types) <a name="types.DATABAZE" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin\raw/wrapper.js#L35" title="wrapper.js:35"><small>(defined@35)</small></a>  
 
@@ -482,11 +401,11 @@ db.utils.upsertByUnique(tb.tabulka, { id: 1, age: 28 }, "id");
 <a name="database_"></a>
 
 ## database\_(def) ⇒ <code>Promise</code>
->Veřejná funkce pro inicializaci databáze pro [LokiWithUtils](#LokiWithUtils).
+>Veřejná funkce pro inicializaci databáze pro [LokiWithUtils](LokiWithUtils).
 
-**Kind**: global function <a name="database_" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin\raw/wrapper.js#L481" title="wrapper.js:481"><small>(defined@481)</small></a>  
+**Kind**: global function <a name="database_" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin\raw/wrapper.js#L452" title="wrapper.js:452"><small>(defined@452)</small></a>  
 **Access**: public  
-**.then**: <code>object</code> {db: [DATABAZE](#types.DATABAZE), tb: [TABULKA](#types.TABULKA)[]}  
+**.then**: <code>object</code> {db: [DATABAZE](#types.DATABAZE), db_utils: [db_utils](#db_utils), tb: [TABULKA](#types.TABULKA)[]}  
 **.catch**: <code>Error</code>  
 
 | Param | Type | Default | Description |
