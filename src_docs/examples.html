@@ -11,10 +11,23 @@
 <body>
     <script>
         localStorage.clear();
-        function database_(name= "db.json", tables= [], init_data= undefined){
-            if(init_data)
-                localStorage.setItem(name, init_data.replace(/"filename":"[^"]+",/, `"filename":"${name}",`));
-            return LokiCordova.database_({ db_file: { file: name }, tables, auto_cordova_adapter: false });
+        function logOutBuilder(output_el){
+            return function(output, append= true){
+                const prev= append ? output_el.innerText : "";
+                if(typeof output==="string") return (output_el.innerText= prev+output);
+                const output_text=
+                    Object.keys(output)
+                    .map(key=> `"${key}": `+JSON.stringify(output[key], (key, value)=> value===undefined?null:value, '  '))
+                    .join("\n\n");
+                return (output_el.innerText= prev+output_text+"\n\n");
+            };
+        }
+        function test(input, target){
+            const output= Object.keys(input)
+            .map(key=> [ key, JSON.stringify(input[key]===target) ])
+            .filter(([ , test_success ])=> !test_success);
+            
+            return output.length ? console.error(`Tyto testy selhali: ${output.map(([key])=> key).join(", ")}`) : console.log("Test proběhl úspěšně");
         }
     </script>
     <article>

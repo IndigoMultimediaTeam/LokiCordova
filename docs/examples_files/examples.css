@@ -84,6 +84,8 @@ xmp[contenteditable=""]:before{
 .output{
     padding: 1rem;
     margin: 0;
+    font-family: monospace;
+    font-weight: bold;
     border: .25rem dotted #f0e09a;
 }
 .output:before{
