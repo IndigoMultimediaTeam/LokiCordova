@@ -11,20 +11,43 @@
 <body>
     <script>
         localStorage.clear();
-        function database_(name= "db.json", tables= [], init_data= undefined){
-            if(init_data)
-                localStorage.setItem(name, init_data.replace(/"filename":"[^"]+",/, `"filename":"${name}",`));
-            return LokiCordova.database_({ db_file: { file: name }, tables, auto_cordova_adapter: false });
+        function logOutBuilder(output_el){
+            return function(output, append= true){
+                const prev= append ? output_el.innerText : "";
+                if(typeof output==="string") return (output_el.innerText= prev+output);
+                const output_text=
+                    Object.keys(output)
+                    .map(key=> `"${key}": `+JSON.stringify(output[key], (key, value)=> value===undefined?null:value, '  '))
+                    .join("\n\n");
+                return (output_el.innerText= prev+output_text+"\n\n");
+            };
+        }
+        function test(input, target){
+            const output= Object.keys(input)
+            .map(key=> [ key, JSON.stringify(input[key]===target) ])
+            .filter(([ , test_success ])=> !test_success);
+            
+            return output.length ? console.error(`Tyto testy selhali: ${output.map(([key])=> key).join(", ")}`) : console.log("Test proběhl úspěšně");
         }
     </script>
     <article>
         <h1>"LokiCordova" — Examples</h1>
         <a href=""https://github.com/IndigoMultimediaTeam/LokiCordova#readme"">⇠ Go back to GitHub repository</a>
 
-        
+        <h2>Ukázka a test joinování</h2>
+        <p></p>
+        <pre class="output"></pre>
         <script contenteditable="">
-            database_("test1", [ "users", "notes" ])
+            const logOut= logOutBuilder(document.currentScript.previousElementSibling);
+        
+            LokiCordova.database_({
+                db_file: { file: "test1" },
+                tables: [ "users", "notes" ],
+                auto_cordova_adapter: false
+            })
             .then(function({ db, tb }){
+                logOut("", false);
+        
                 tb.users.insert([
                     { id: 1, name: "Jan" },
                     { id: 2, name: "Ivana" },
@@ -56,6 +79,8 @@
                     .chain(db.utils.left_join_strict, join_params)
                     .data()
                     .map(joinMapData);
+        
+                logOut({ notes_left_join, notes_left_join_strict });
                 
                 join_params= { data: tb.notes, left_key: "id", right_key: "id_user" };
                 joinMapData= ({ left: { name }, right: { text } })=> ({ name, text });
@@ -70,12 +95,18 @@
                     .data()
                     .map(joinMapData);
                 
-                console.log({
-                    notes_left_join,
-                    notes_left_join_strict,
-                    users_left_join,
-                    users_left_join_strict
-                });
+                logOut({ users_left_join, users_left_join_strict });
+        
+                /*····················TESTS····················*/
+        
+                test({ notes_left_join, notes_left_join_strict, users_left_join, users_left_join_strict },
+                    {
+                        notes_left_join: '[{"name":"Jan","text":"1-1"},{"name":"Jan","text":"2-1"},{"name":"Ivana","text":"3-2"},{"text":"4-9"},{"text":"5-8"}]',
+                        notes_left_join_strict: '[{"name":"Ivana","text":"3-2"},{"name":"Jan","text":"2-1"},{"name":"Jan","text":"1-1"}]',
+                        users_left_join: '[{"name":"Jan","text":"2-1"},{"name":"Ivana","text":"3-2"},{"name":"Peter"},{"name":"Amanda"},{"name":"Thor"},{"name":"Adéla"}]',
+                        users_left_join_strict: '[{"name":"Ivana","text":"3-2"},{"name":"Jan","text":"2-1"}]'
+                    }
+                );
             });
         </script>
     </article>
