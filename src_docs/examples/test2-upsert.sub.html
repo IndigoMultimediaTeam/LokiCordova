@@ -1,0 +1,45 @@
+<h2>Ukázka a test insert/update funkce `upsert` (vloží/aktualizuje záznam)</h2>
+<p></p>
+<pre class="output"></pre>
+<script contenteditable="">
+    (function(){
+        const logOut= logOutBuilder(document.currentScript.previousElementSibling);
+
+        LokiCordova.database_({
+            db_file: { file: "test2" },
+            tables: [ "users" ],
+            auto_cordova_adapter: false
+        })
+        .then(function({ db, db_utils, tb }){
+            logOut("", false);
+
+            db_utils.upsertByQuery(tb.users, { id: 1, name: "Jan" }, { id: 1 });
+            db_utils.upsertByQuery(tb.users, { surname: "Andrle" }, { id: 1 });
+            
+            db_utils.upsertByKey(tb.users, { id: 2, name: "Anna" });
+            db_utils.upsertByKey(tb.users, { id: 2, surname: "Nová" });
+
+            tb.users.insert({ id: 3, name: "Petra" });
+            db_utils.upsertByUnique(tb.users, { $loki: 3, surname: "Vymyšlená" }, "$loki");
+
+            tb.users.insert({ id: 4, name: "Lukáš" });
+            const update= db_utils.upsertByCallbacks(
+                tb.users,
+                Object.assign,
+                (c, { id })=> c.findOne({ id })
+            );
+            update({ id: 4, surname: "Zimmerman" });
+
+            const users= tb.users.data.map(({ $loki, id, name, surname })=> ({ $loki, id, name, surname }));
+            logOut({ users });
+
+            /*····················TESTS····················*/
+
+            test({ users },
+                {
+                    users: '[{"$loki":1,"id":1,"name":"Jan","surname":"Andrle"},{"$loki":2,"id":2,"name":"Anna","surname":"Nová"},{"$loki":3,"id":3,"name":"Petra","surname":"Vymyšlená"},{"$loki":4,"id":4,"name":"Lukáš","surname":"Zimmerman"}]'
+                }
+            );
+        });
+    })();
+</script>
