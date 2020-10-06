@@ -33,7 +33,7 @@ function create_(file, params){
     });
 }
 /**
- * Veřejná funkce pro inicializaci databáze pro {@link LokiWithUtils}.
+ * Veřejná funkce pro inicializaci databáze pro {@link LokiJS}.
  * @method database_
  * @public
  * @param {object} def
