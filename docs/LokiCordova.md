@@ -30,7 +30,7 @@
 
 <dl>
 <dt><a href="#database_">database_(def)</a> ⇒ <code>Promise</code></dt>
-<dd><p>Veřejná funkce pro inicializaci databáze pro <a href="LokiJS">LokiJS</a>.</p>
+<dd><p>Veřejná funkce pro inicializaci databáze pro <a href="#loki">loki</a>.</p>
 </dd>
 </dl>
 
@@ -401,7 +401,7 @@ db.utils.upsertByUnique(tb.tabulka, { id: 1, age: 28 }, "id");
 <a name="database_"></a>
 
 ## database\_(def) ⇒ <code>Promise</code>
->Veřejná funkce pro inicializaci databáze pro [LokiJS](LokiJS).
+>Veřejná funkce pro inicializaci databáze pro [loki](#loki).
 
 **Kind**: global function <a name="database_" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin\raw/wrapper.js#L452" title="wrapper.js:452"><small>(defined@452)</small></a>  
 **Access**: public  
