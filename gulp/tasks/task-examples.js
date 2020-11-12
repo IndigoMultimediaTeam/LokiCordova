@@ -7,8 +7,12 @@ module.exports= function({gulp, scripts, $g, $o, app, cordova_target_device, err
     return function(cb){
         if(error.getNum()) return cb();
         gulp.src([ `${folder}${files_pattern}`, `!${folder}${files_not_pattern}` ])
-            .pipe(gulp_place({ folder, string_wrapper: '"' }))
+        .pipe(gulp_place({ folder, string_wrapper: '' }))
+        .pipe(gulp.dest(target_folder))
+        .on('end', ()=>{
+            gulp.src([ app.directories.bin+app.name+".min.js" ])
             .pipe(gulp.dest(target_folder))
             .on('end', cb);
+        });
     };
 };
