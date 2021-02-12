@@ -21,7 +21,7 @@
 <dt><a href="#types">types</a> : <code>object</code></dt>
 <dd><p>Typy v rámci <a href="http://techfort.github.io/LokiJS">Loki</a> databáze a nebo v rámci této knihovny.</p>
 </dd>
-<dt><a href="#db_utils">db_utils</a> : <code>object</code> ℗</dt>
+<dt><a href="#db_utils">db_utils</a> : <code>object</code></dt>
 <dd><p>Jmenný prostor obsahující pomocné utility pro práci s tabulkami/databází</p>
 </dd>
 </dl>
@@ -41,7 +41,7 @@
 <a name="loki"></a>
 
 ## loki ℗
-**Kind**: global class <a name="loki" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin\raw/wrapper.js#L25" title="wrapper.js:25"><small>(defined@25)</small></a>  
+**Kind**: global class <a name="loki" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin/raw/wrapper.js#L25" title="wrapper.js:25"><small>(defined@25)</small></a>  
 **Access**: private  
 
 * * *
@@ -57,7 +57,7 @@
 <a name="FSAdapter"></a>
 
 ## FSAdapter
-**Kind**: global class <a name="FSAdapter" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin\raw/wrapper.js#L126" title="wrapper.js:126"><small>(defined@126)</small></a>  
+**Kind**: global class <a name="FSAdapter" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin/raw/wrapper.js#L125" title="wrapper.js:125"><small>(defined@125)</small></a>  
 **Access**: public  
 
 * * *
@@ -78,7 +78,7 @@
 <a name="FSAdapterError"></a>
 
 ## FSAdapterError
-**Kind**: global class <a name="FSAdapterError" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin\raw/wrapper.js#L149" title="wrapper.js:149"><small>(defined@149)</small></a>  
+**Kind**: global class <a name="FSAdapterError" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin/raw/wrapper.js#L148" title="wrapper.js:148"><small>(defined@148)</small></a>  
 **Access**: public  
 
 * * *
@@ -88,7 +88,7 @@
 ## types : <code>object</code>
 >Typy v rámci [Loki](http://techfort.github.io/LokiJS) databáze a nebo v rámci této knihovny.
 
-**Kind**: global namespace <a name="types" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin\raw/wrapper.js#L31" title="wrapper.js:31"><small>(defined@31)</small></a>  
+**Kind**: global namespace <a name="types" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin/raw/wrapper.js#L31" title="wrapper.js:31"><small>(defined@31)</small></a>  
 
 * [types](#types) : <code>object</code>
     * [.DATABAZE](#types.DATABAZE) : <code>Object</code>
@@ -108,7 +108,7 @@
 ### types.DATABAZE : <code>Object</code>
 >Instance `loki` (resp. [LokiWithUtils](LokiWithUtils)), viz [JSDoc: Class: Loki](http://techfort.github.io/LokiJS/Loki.html).
 
-**Kind**: static typedef of [<code>types</code>](#types) <a name="types.DATABAZE" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin\raw/wrapper.js#L35" title="wrapper.js:35"><small>(defined@35)</small></a>  
+**Kind**: static typedef of [<code>types</code>](#types) <a name="types.DATABAZE" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin/raw/wrapper.js#L35" title="wrapper.js:35"><small>(defined@35)</small></a>  
 
 * * *
 
@@ -117,7 +117,7 @@
 ### types.TABULKA : <code>Object</code>
 >Instance `Collection`, viz [JSDoc: Class: Collection](http://techfort.github.io/LokiJS/Collection.html).
 
-**Kind**: static typedef of [<code>types</code>](#types) <a name="types.TABULKA" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin\raw/wrapper.js#L40" title="wrapper.js:40"><small>(defined@40)</small></a>  
+**Kind**: static typedef of [<code>types</code>](#types) <a name="types.TABULKA" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin/raw/wrapper.js#L40" title="wrapper.js:40"><small>(defined@40)</small></a>  
 
 * * *
 
@@ -126,7 +126,7 @@
 ### types.RADEK : <code>Object</code>
 >Záznam z [TABULKA](#types.TABULKA), viz [JSDoc: Class: Resultset](http://techfort.github.io/LokiJS/Resultset.html).
 
-**Kind**: static typedef of [<code>types</code>](#types) <a name="types.RADEK" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin\raw/wrapper.js#L45" title="wrapper.js:45"><small>(defined@45)</small></a>  
+**Kind**: static typedef of [<code>types</code>](#types) <a name="types.RADEK" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin/raw/wrapper.js#L45" title="wrapper.js:45"><small>(defined@45)</small></a>  
 
 * * *
 
@@ -137,7 +137,7 @@
 
 Nedoporučuje se, aby dědil informace z [RADEK](#types.RADEK) (PS: objekty se předávají **referencí!!!**).
 
-**Kind**: static typedef of [<code>types</code>](#types) <a name="types.DATA" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin\raw/wrapper.js#L50" title="wrapper.js:50"><small>(defined@50)</small></a>  
+**Kind**: static typedef of [<code>types</code>](#types) <a name="types.DATA" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin/raw/wrapper.js#L50" title="wrapper.js:50"><small>(defined@50)</small></a>  
 **Example** *(očekávané)*  
 ```js
 const data_1= { name: "Jan", surname: "Andrle" };
@@ -163,7 +163,7 @@ const data_4= { $loki: 5, meta: { / * … * / } };
 
 *Tyto dotazy jsou výhodnější na použití než `*.where`, protože jsou optimalizované (případně optimalizovatlené) – viz [JSDoc: Tutorial: Indexing and Query performance](http://techfort.github.io/LokiJS/tutorial-Indexing%20and%20Query%20performance.html)!*
 
-**Kind**: static typedef of [<code>types</code>](#types) <a name="types.DOTAZ" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin\raw/wrapper.js#L68" title="wrapper.js:68"><small>(defined@68)</small></a>  
+**Kind**: static typedef of [<code>types</code>](#types) <a name="types.DOTAZ" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin/raw/wrapper.js#L68" title="wrapper.js:68"><small>(defined@68)</small></a>  
 **Example** *(Vyhledání uživatele/ů obsahující ve jméně &#x27;Jan&#x27; a jejichž věk je &gt;&#x3D;28)*  
 ```js
 const dotaz= { $and: [ { name: { $contains: "Jan" } }, { age: { $gte: 28 } } ] };
@@ -180,7 +180,7 @@ Lze používat:
 - [`*.transform(transform: **DB_TRANSFORMS**, parameters: **object**)`](http://techfort.github.io/LokiJS/Resultset.html#transform)
 - [*.chain(transform: **DB_TRANSFORMS**, parameters: **object**)](http://techfort.github.io/LokiJS/Collection.html#chain)
 
-**Kind**: static typedef of [<code>types</code>](#types) <a name="types.DB_TRANSFORMACE" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin\raw/wrapper.js#L77" title="wrapper.js:77"><small>(defined@77)</small></a>  
+**Kind**: static typedef of [<code>types</code>](#types) <a name="types.DB_TRANSFORMACE" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin/raw/wrapper.js#L77" title="wrapper.js:77"><small>(defined@77)</small></a>  
 
 * * *
 
@@ -189,7 +189,7 @@ Lze používat:
 ### types.loki\_options : <code>object</code>
 >Parametry pro inicializaci [JSDoc: Class: Loki](http://techfort.github.io/LokiJS/Loki.html#Loki).
 
-**Kind**: static typedef of [<code>types</code>](#types) <a name="types.loki_options" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin\raw/wrapper.js#L86" title="wrapper.js:86"><small>(defined@86)</small></a>  
+**Kind**: static typedef of [<code>types</code>](#types) <a name="types.loki_options" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin/raw/wrapper.js#L86" title="wrapper.js:86"><small>(defined@86)</small></a>  
 
 * * *
 
@@ -198,7 +198,7 @@ Lze používat:
 ### types.FSAdapter\_options : <code>object</code>
 >Parametry pro [FSAdapter](#FSAdapter)
 
-**Kind**: static typedef of [<code>types</code>](#types) <a name="types.FSAdapter_options" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin\raw/wrapper.js#L94" title="wrapper.js:94"><small>(defined@94)</small></a>  
+**Kind**: static typedef of [<code>types</code>](#types) <a name="types.FSAdapter_options" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin/raw/wrapper.js#L112" title="wrapper.js:112"><small>(defined@112)</small></a>  
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -210,13 +210,12 @@ Lze používat:
 
 <a name="db_utils"></a>
 
-## db\_utils : <code>object</code> ℗
+## db\_utils : <code>object</code>
 >Jmenný prostor obsahující pomocné utility pro práci s tabulkami/databází
 
-**Kind**: global namespace <a name="db_utils" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin\raw/wrapper.js#L284" title="wrapper.js:284"><small>(defined@284)</small></a>  
-**Access**: private  
+**Kind**: global namespace <a name="db_utils" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin/raw/wrapper.js#L283" title="wrapper.js:283"><small>(defined@283)</small></a>  
 
-* [db_utils](#db_utils) : <code>object</code> ℗
+* [db_utils](#db_utils) : <code>object</code>
     * _static_
         * [.left_join](#db_utils.left_join)
         * [.left_join_strict](#db_utils.left_join_strict)
@@ -238,7 +237,7 @@ Lze používat:
 
 Využívá [join_step](#db_utils..join_step)
 
-**Kind**: static constant of [<code>db\_utils</code>](#db_utils) <a name="db_utils.left_join" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin\raw/wrapper.js#L314" title="wrapper.js:314"><small>(defined@314)</small></a>  
+**Kind**: static constant of [<code>db\_utils</code>](#db_utils) <a name="db_utils.left_join" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin/raw/wrapper.js#L313" title="wrapper.js:313"><small>(defined@313)</small></a>  
 **Properties**
 
 | Type |
@@ -259,7 +258,7 @@ tb.table.chain().transform(db.utils.left_join, { data: tb.another_table.chain(),
 
 Využívá [join_step](#db_utils..join_step)
 
-**Kind**: static constant of [<code>db\_utils</code>](#db_utils) <a name="db_utils.left_join_strict" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin\raw/wrapper.js#L326" title="wrapper.js:326"><small>(defined@326)</small></a>  
+**Kind**: static constant of [<code>db\_utils</code>](#db_utils) <a name="db_utils.left_join_strict" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin/raw/wrapper.js#L325" title="wrapper.js:325"><small>(defined@325)</small></a>  
 **Properties**
 
 | Type |
@@ -278,7 +277,7 @@ tb.table.chain().transform(db.utils.left_join_strict, { data: tb.another_table.c
 ### db_utils.save\_(database) ⇒ <code>Promise</code>
 >Uložení změn v databázi
 
-**Kind**: static method of [<code>db\_utils</code>](#db_utils) <a name="db_utils.save_" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin\raw/wrapper.js#L341" title="wrapper.js:341"><small>(defined@341)</small></a>  
+**Kind**: static method of [<code>db\_utils</code>](#db_utils) <a name="db_utils.save_" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin/raw/wrapper.js#L340" title="wrapper.js:340"><small>(defined@340)</small></a>  
 **.then**: <code>undefined</code> Volá se při úspěchu  
 **.catch**: <code>Error</code> Volá se při chybě `Error`  
 
@@ -294,7 +293,7 @@ tb.table.chain().transform(db.utils.left_join_strict, { data: tb.another_table.c
 ### db_utils.upsertByQuery(collection, updated_data, query) ⇒ <code>number</code>
 >Pomocná funkce pro vložení/aktualizování záznamu v tabulce `colection`.
 
-**Kind**: static method of [<code>db\_utils</code>](#db_utils) <a name="db_utils.upsertByQuery" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin\raw/wrapper.js#L356" title="wrapper.js:356"><small>(defined@356)</small></a>  
+**Kind**: static method of [<code>db\_utils</code>](#db_utils) <a name="db_utils.upsertByQuery" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin/raw/wrapper.js#L355" title="wrapper.js:355"><small>(defined@355)</small></a>  
 **Returns**: <code>number</code> - 0/1 záznam aktualizován/vložen  
 
 | Param | Type | Description |
@@ -315,7 +314,7 @@ db.utils.upsertByQuery(tb.tabulka, { age: 28 }, { $and: [ { name: "Jan" }, { sur
 ### db_utils.upsertByKey(collection, updated_data, [key]) ⇒ <code>number</code>
 >Pomocná funkce pro vložení/aktualizování záznamu v tabulce `colection`.
 
-**Kind**: static method of [<code>db\_utils</code>](#db_utils) <a name="db_utils.upsertByKey" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin\raw/wrapper.js#L376" title="wrapper.js:376"><small>(defined@376)</small></a>  
+**Kind**: static method of [<code>db\_utils</code>](#db_utils) <a name="db_utils.upsertByKey" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin/raw/wrapper.js#L375" title="wrapper.js:375"><small>(defined@375)</small></a>  
 **Returns**: <code>number</code> - 0/1 záznam aktualizován/vložen  
 
 | Param | Type | Default | Description |
@@ -337,7 +336,7 @@ db.utils.upsertByKey(tb.tabulka, { key: 15, age: 28 }, "key");
 ### db_utils.upsertByUnique(collection, updated_data, [key]) ⇒ <code>number</code>
 >Pomocná funkce pro vložení/aktualizování záznamu v tabulce `colection`.
 
-**Kind**: static method of [<code>db\_utils</code>](#db_utils) <a name="db_utils.upsertByUnique" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin\raw/wrapper.js#L399" title="wrapper.js:399"><small>(defined@399)</small></a>  
+**Kind**: static method of [<code>db\_utils</code>](#db_utils) <a name="db_utils.upsertByUnique" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin/raw/wrapper.js#L398" title="wrapper.js:398"><small>(defined@398)</small></a>  
 **Returns**: <code>number</code> - 0/1 záznam aktualizován/vložen  
 **Throws**:
 
@@ -365,7 +364,7 @@ db.utils.upsertByUnique(tb.tabulka, { id: 1, age: 28 }, "id");
 ### db_utils.upsertByCallbacks(collection, updateInsert, find) ⇒ <code>function</code>
 >**WIP**
 
-**Kind**: static method of [<code>db\_utils</code>](#db_utils) <a name="db_utils.upsertByCallbacks" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin\raw/wrapper.js#L420" title="wrapper.js:420"><small>(defined@420)</small></a>  
+**Kind**: static method of [<code>db\_utils</code>](#db_utils) <a name="db_utils.upsertByCallbacks" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin/raw/wrapper.js#L419" title="wrapper.js:419"><small>(defined@419)</small></a>  
 
 | Param | Type |
 | --- | --- |
@@ -381,7 +380,7 @@ db.utils.upsertByUnique(tb.tabulka, { id: 1, age: 28 }, "id");
 ### db_utils~join\_step
 >Krok v [DB_TRANSFORMACE](#types.DB_TRANSFORMACE) sloužící k fyzickému sloučení záznamů. Vždy se jedná o "Left Join" transformované tabulky!
 
-**Kind**: inner constant of [<code>db\_utils</code>](#db_utils) <a name="db_utils..join_step" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin\raw/wrapper.js#L299" title="wrapper.js:299"><small>(defined@299)</small></a>  
+**Kind**: inner constant of [<code>db\_utils</code>](#db_utils) <a name="db_utils..join_step" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin/raw/wrapper.js#L298" title="wrapper.js:298"><small>(defined@298)</small></a>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -403,7 +402,7 @@ db.utils.upsertByUnique(tb.tabulka, { id: 1, age: 28 }, "id");
 ## database\_(def) ⇒ <code>Promise</code>
 >Veřejná funkce pro inicializaci databáze pro [loki](#loki).
 
-**Kind**: global function <a name="database_" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin\raw/wrapper.js#L452" title="wrapper.js:452"><small>(defined@452)</small></a>  
+**Kind**: global function <a name="database_" href="https://github.com/IndigoMultimediaTeam/LokiCordova/blob/master/bin/raw/wrapper.js#L451" title="wrapper.js:451"><small>(defined@451)</small></a>  
 **Access**: public  
 **.then**: <code>object</code> {db: [DATABAZE](#types.DATABAZE), db_utils: [db_utils](#db_utils), tb: [TABULKA](#types.TABULKA)[]}  
 **.catch**: <code>Error</code>  
