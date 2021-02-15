@@ -88,21 +88,6 @@
      * @typedef {object} loki_options
      * @memberof types
      */
-    /* cordova *//* global cordova *///gulp.keep.line
-    
-    function defaultOptions(){
-        /**
-         * Parametry pro {@link FSAdapter}
-         * @memberof types
-         * @typedef {object} FSAdapter_options
-         * @param {string} [prefix=loki] Pro ukládání se používá jméno databáze z `loki` a prefix, definovaný zde.
-         * @param {string} [target_location=cordova.file.dataDirectory] Cesta pro uložení databáze
-         */
-        return {
-            prefix: "loki",
-            target_location: cordova.file.dataDirectory
-        };
-    }
     var _createClass= (function(){
         function defineProperties(target, props){
             for (var key in props){
@@ -121,7 +106,21 @@
     var _classCallCheck= function(instance, Constructor){
       if (!(instance instanceof Constructor)) throw new TypeError("Cannot call a class as a function");
     };
-
+    /* cordova *//* global cordova *///gulp.keep.line
+    
+    function defaultOptions(){
+        /**
+         * Parametry pro {@link FSAdapter}
+         * @memberof types
+         * @typedef {object} FSAdapter_options
+         * @param {string} [prefix=loki] Pro ukládání se používá jméno databáze z `loki` a prefix, definovaný zde.
+         * @param {string} [target_location=cordova.file.dataDirectory] Cesta pro uložení databáze
+         */
+        return {
+            prefix: "loki",
+            target_location: cordova.file.dataDirectory
+        };
+    }
     var Object_assign= Object.assign;
     /**
      * Třída (adaptér) pro ukládání `loki` v cordově do souborů.
@@ -158,6 +157,46 @@
         _inherits(FSAdapterError, _Error);
         return FSAdapterError;
     })(Error);
+    instance_methods._createBlob= {
+        // adapted from http://stackoverflow.com/questions/15293694/blob-constructor-browser-compatibility
+    
+        value: function _createBlob(data, datatype) {
+            var blob;
+    
+            try {
+                blob = new Blob([data], { type: datatype });
+            } catch (err) {
+                window.BlobBuilder = window.BlobBuilder || window.WebKitBlobBuilder || window.MozBlobBuilder || window.MSBlobBuilder;
+    
+                if (err.name === "TypeError" && window.BlobBuilder) {
+                    var bb = new window.BlobBuilder();
+                    bb.append(data);
+                    blob = bb.getBlob(datatype);
+                } else if (err.name === "InvalidStateError") {
+                    // InvalidStateError (tested on FF13 WinXP)
+                    blob = new Blob([data], { type: datatype });
+                } else {
+                    // We're screwed, blob constructor unsupported entirely
+                    throw new FSAdapterError("Unable to create blob" + JSON.stringify(err));
+                }
+            }
+            return blob;
+        }
+    };
+
+    instance_methods._getFile= {
+        value: function _getFile(name, handleSuccess, handleError) {
+            var _this = this;
+    
+            window.resolveLocalFileSystemURL(_this.options.target_location, function (dir) {
+                var fileName = _this.options.prefix + "__" + name;
+                dir.getFile(fileName, { create: true }, handleSuccess, handleError);
+            }, function (err) {
+                throw new FSAdapterError("Unable to resolve local file system URL" + JSON.stringify(err));
+            });
+        }
+    };
+
     var TAG = "[FSAdapter]";
     var debug_log= function(){};
     
@@ -239,52 +278,12 @@
             });
         }
     };
-
-    instance_methods._createBlob= {
-        // adapted from http://stackoverflow.com/questions/15293694/blob-constructor-browser-compatibility
-    
-        value: function _createBlob(data, datatype) {
-            var blob;
-    
-            try {
-                blob = new Blob([data], { type: datatype });
-            } catch (err) {
-                window.BlobBuilder = window.BlobBuilder || window.WebKitBlobBuilder || window.MozBlobBuilder || window.MSBlobBuilder;
-    
-                if (err.name === "TypeError" && window.BlobBuilder) {
-                    var bb = new window.BlobBuilder();
-                    bb.append(data);
-                    blob = bb.getBlob(datatype);
-                } else if (err.name === "InvalidStateError") {
-                    // InvalidStateError (tested on FF13 WinXP)
-                    blob = new Blob([data], { type: datatype });
-                } else {
-                    // We're screwed, blob constructor unsupported entirely
-                    throw new FSAdapterError("Unable to create blob" + JSON.stringify(err));
-                }
-            }
-            return blob;
-        }
-    };
-
-    instance_methods._getFile= {
-        value: function _getFile(name, handleSuccess, handleError) {
-            var _this = this;
-    
-            window.resolveLocalFileSystemURL(_this.options.target_location, function (dir) {
-                var fileName = _this.options.prefix + "__" + name;
-                dir.getFile(fileName, { create: true }, handleSuccess, handleError);
-            }, function (err) {
-                throw new FSAdapterError("Unable to resolve local file system URL" + JSON.stringify(err));
-            });
-        }
-    };
     _createClass(FSAdapter, instance_methods);
 
     /**
      * Jmenný prostor obsahující pomocné utility pro práci s tabulkami/databází
      * @namespace db_utils
-     * @private
+     * @global
      */
     const loki_utils= (function loki_utils_iief(){
         /**

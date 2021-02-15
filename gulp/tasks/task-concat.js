@@ -5,6 +5,11 @@ module.exports= function({gulp, scripts, $g, $o, app, cordova_target_device, err
         gulp.src([ app.directories.bin+"raw/*.min.js" ])
             .pipe($g.concat(app.name+".min.js"))
             .pipe(gulp.dest(app.directories.bin))
-            .on('end', cb);
+            .on('end', function(){
+                gulp.src([ app.directories.bin+"raw/*.d.ts" ])
+                    .pipe($g.concat(app.name+".d.ts"))
+                    .pipe(gulp.dest(app.directories.bin))
+                    .on('end', cb);
+            });
     };
 };

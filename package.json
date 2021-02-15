@@ -6,8 +6,8 @@
     "description": "Opinionated-customized usage of LokiJS in ours Cordova's projects.",
     "main": "gulpfile.js",
     "sequence": [
-        "lokijs",
         "javascript",
+        "lokijs",
         "concat",
         "examples",
         "doc"
@@ -38,7 +38,8 @@
         "check": "node ./jaaJBT.js check && npm outdated",
         "update": "node ./jaaJBT.js update && npm install",
         "jshint": "node ./node_modules/jshint/bin/jshint --verbose",
-        "jshint_full": "node ./node_modules/jshint/bin/jshint --verbose --show-non-errors"
+        "jshint_full": "node ./node_modules/jshint/bin/jshint --verbose --show-non-errors",
+        "jsdoc2ts": "npx jsdoc -t ./node_modules/tsd-jsdoc/dist"
     },
     "directories": {
         "gulp": "gulp/",
@@ -100,5 +101,6 @@
         "globals": {
             "gulp_place": false
         }
-    }
+    },
+    "dependencies": {}
 }
